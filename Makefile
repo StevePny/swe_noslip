@@ -1,6 +1,7 @@
-CC=cc
-CFLAGS=-g -Wall
-LDFLAGS=-lm
+CC=icc
+CFLAGS=-Wall
+#LDFLAGS=-lm
+LDFLAGS=
 BINARY=shallow_water
 
 SOURCE_FILES=shallow_water.c\

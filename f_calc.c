@@ -83,24 +83,14 @@ void Fcalc(double *fields_dot, const double *fields, const double *parameters, i
    */     
   for (i=0;i<i_max;i++) {
 
-    //U[i] = .5*(P[i]+P[n[i][0]])*u[i];
-    //U[n[i][0]] = .5*(P[n[i][0]]+P[i])*u[n[i][0]];
     U[i] = .5*(P[i]+P[n[i][2]])*u[i];
-    //V[i] = .5*(P[i]+P[n[i][1]])*v[i];
-    //V[n[i][1]] = .5*(P[n[i][1]]+P[i])*v[n[i][1]];
     V[i] = .5*(P[i]+P[n[i][3]])*v[i];
 
-    //eta[i] = (FSDX*(v[n[i][0]]-v[i])
-    //  -FSDY*(u[n[i][1]]-u[i]))
-    //  /(P[i]+P[n[i][0]]+P[n[i][1]]+P[n[n[i][0]][1]]);
-    //eta[n[n[i][0]][1]] = (FSDX*(v[n[n[i][0]][1]]-v[n[i][1]])
-    //  -FSDY*(u[n[n[i][0]][1]]-u[n[i][0]]))
-    //  /(P[i]+P[n[i][0]]+P[n[n[i][0]][1]]+P[n[i][1]]);
     eta[i] = (FSDX*(v[i]-v[n[i][2]])-FSDY*(u[i]-u[n[i][3]]))
-      /(P[n[n[i][2]][3]]+P[n[i][3]]+P[i]+P[n[i][2]]);
+            /(P[n[n[i][2]][3]]+P[n[i][3]]+P[i]+P[n[i][2]]);
 
     H[i] = P[i]+.25*(u[n[i][0]]*u[n[i][0]]+u[i]*u[i]
-      +v[n[i][1]]*v[n[i][1]]+v[i]*v[i]);
+                    +v[n[i][1]]*v[n[i][1]]+v[i]*v[i]);
   }
   //print_field(U, "U", ncycle, xdim, ydim, print_out_order);
   //print_field(V, "V", ncycle, xdim, ydim, print_out_order);
